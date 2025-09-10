@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDS - 抑郁自评量表</title>
+    <title>抑郁自评量表</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -95,16 +95,15 @@
         <!-- 英雄区域 -->
         <section class="relative py-20 md:py-32 overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 -z-10"></div>
-            <div class="absolute top-0 right-0 w-1/2 h-full bg-[url('https://picsum.photos/id/1068/800/800')] bg-cover bg-center opacity-5 -z-10"></div>
             <div class="container mx-auto px-4">
-                <div class="max-w-3xl">
+                <div class="max-w-3xl mx-auto text-center">
                     <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-neutral-800 mb-6">
-                        抑郁自评量表<br><span class="text-primary">(SDS)</span>
+                        抑郁自评量表
                     </h1>
-                    <p class="text-[clamp(1rem,2vw,1.25rem)] text-neutral-600 mb-8 max-w-2xl text-balance">
-                        抑郁自评量表(SDS)是一种标准化的心理评估工具，帮助您了解自身的抑郁倾向和情绪状态，为心理健康提供参考。
+                    <p class="text-[clamp(1rem,2vw,1.25rem)] text-neutral-600 mb-8 max-w-2xl mx-auto text-balance">
+                        抑郁自评量表是一种标准化的心理评估工具，帮助您了解自身的抑郁倾向和情绪状态，为心理健康提供参考。
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="#assessment" class="btn-primary text-center">
                             开始自评 <i class="fa fa-arrow-right ml-2"></i>
                         </a>
@@ -120,15 +119,16 @@
         <section id="about" class="py-16 bg-white">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
-                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-800 mb-4">关于抑郁自评量表(SDS)</h2>
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-800 mb-4">关于抑郁自评量表</h2>
                     <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
                 </div>
                 
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="order-2 md:order-1">
+                <!-- 单栏布局，内容居中 -->
+                <div class="max-w-3xl mx-auto">
+                    <div>
                         <h3 class="text-xl font-semibold mb-4 text-neutral-800">量表简介</h3>
                         <p class="text-neutral-600 mb-4">
-                            抑郁自评量表(Self-Rating Depression Scale, SDS)由Zung于1965年编制，是目前应用最广泛的抑郁症状自评工具之一。
+                            抑郁自评量表(Self-Rating Depression Scale)由Zung于1965年编制，是目前应用最广泛的抑郁症状自评工具之一。
                         </p>
                         <p class="text-neutral-600 mb-4">
                             该量表包含20个项目，每个项目描述一种抑郁相关症状，用于评估最近一周内的情绪状态和相关症状的严重程度。
@@ -159,7 +159,7 @@
                     <p class="text-neutral-600 mt-4 max-w-2xl mx-auto">请在开始评估前仔细阅读以下说明，以确保评估结果的准确性</p>
                 </div>
                 
-                <div class="grid md:grid-cols-3 gap-8">
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     <div class="bg-white rounded-xl p-6 shadow-soft card-hover">
                         <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                             <i class="fa fa-clock-o text-primary text-2xl"></i>
@@ -308,7 +308,7 @@
     <!-- 页脚 -->
     <footer class="bg-neutral-800 text-neutral-300 py-12">
         <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8 max-w-5xl mx-auto">
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
                         <i class="fa fa-heart-o text-white text-xl"></i>
@@ -343,7 +343,7 @@
     </footer>
 
     <script>
-        // 抑郁自评量表(SDS)题目数据
+        // 抑郁自评量表题目数据
         const questions = [
             {
                 id: 1,
@@ -672,7 +672,7 @@
 
         // 更新选项样式
         function updateOptionStyles(questionId) {
-            const labels = questionContainer.querySelectorAll(`label[for^="option-${questionId}"]`);
+            const labels = questionContainer.querySelectorAll('label');
             const selectedValue = answers[questionId];
             
             labels.forEach(label => {
@@ -757,7 +757,7 @@
             
             // 检查是否所有题目都已回答
             if (Object.keys(answers).length !== questions.length) {
-                if (!confirm('您还有未完成的题目，确定要提交吗？')) {
+                if (!confirm('您还有未完成的题目，确定要提交吗？未回答的题目将按"很少"计分。')) {
                     return;
                 }
             }
@@ -776,71 +776,69 @@
             });
         });
 
-        // 计算分数
+        // 计算总分并显示结果
         function calculateScore() {
             let totalScore = 0;
             
+            // 计算总分（包含反向计分处理）
             questions.forEach(question => {
-                // 如果有未回答的题目，按最低分计算
-                const answer = answers[question.id] !== undefined ? answers[question.id] : 1;
+                // 如果有未回答的题目，按"很少"计分（1分）
+                const rawScore = answers[question.id] || 1;
                 
                 // 处理反向计分题
                 if (question.reverse) {
-                    totalScore += 5 - answer; // 反向计分：1→4，2→3，3→2，4→1
+                    // 反向计分：5 - 原始分（1→4, 2→3, 3→2, 4→1）
+                    totalScore += 5 - rawScore;
                 } else {
-                    totalScore += answer;
+                    // 正向计分：直接累加
+                    totalScore += rawScore;
                 }
             });
             
-            // 计算标准分 (原始分 × 1.25，取整数)
+            // 计算标准分（乘以1.25后取整数）
             const standardScore = Math.round(totalScore * 1.25);
             
-            // 显示分数
-            totalScoreElement.textContent = standardScore;
-            
-            // 确定分数类别和解释
+            // 确定分数类别
             let category, explanation, suggestions;
             
-            if (standardScore < 53) {
+            if (standardScore <= 53) {
                 category = "无抑郁";
-                explanation = "您的评估结果显示没有明显的抑郁症状。这表明您当前的情绪状态良好，能够较好地应对日常生活中的压力和挑战。";
-                suggestions = "保持当前的生活状态和应对方式，继续关注自己的心理健康。可以通过保持良好的作息、适当的运动和积极的社交活动来维持心理健康。";
-                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-green-500 to-green-600 text-white";
-            } else if (standardScore < 63) {
+                explanation = "您的得分表明目前没有明显的抑郁症状。这是正常的心理状态。";
+                suggestions = "保持健康的生活方式，包括规律的作息、均衡的饮食和适当的运动。继续保持良好的心理状态，当遇到情绪波动时，可以尝试与亲友交流或进行放松活动。";
+                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-primary to-primary/80 text-white";
+            } else if (standardScore <= 62) {
                 category = "轻度抑郁";
-                explanation = "您的评估结果显示存在轻度抑郁症状。这可能表现为偶尔的情绪低落、兴趣减退或精力下降，但这些症状尚未显著影响您的日常生活功能。";
-                suggestions = "注意休息和自我调节，尝试通过适当的运动、与亲友交流、培养兴趣爱好等方式改善情绪。如果症状持续或加重，建议寻求专业心理咨询。";
-                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-yellow-500 to-yellow-600 text-white";
-            } else if (standardScore < 73) {
+                explanation = "您的得分表明可能存在轻度抑郁症状，表现为偶尔的情绪低落、兴趣减退或精力下降等。";
+                suggestions = "建议适当调整生活节奏，增加户外活动和社交互动，尝试放松训练如冥想或深呼吸练习。如果症状持续两周以上，建议寻求专业心理支持。";
+                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-blue-500 to-blue-400 text-white";
+            } else if (standardScore <= 72) {
                 category = "中度抑郁";
-                explanation = "您的评估结果显示存在中度抑郁症状。这可能包括持续的情绪低落、对日常活动兴趣明显减退、睡眠或食欲改变、精力不足等，这些症状可能已经对您的日常生活造成一定影响。";
-                suggestions = "建议您寻求专业的心理支持或医疗帮助，进行更详细的评估和适当的干预。同时，尝试与亲友保持联系，避免孤立自己，适当进行一些轻度活动。";
-                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-orange-500 to-orange-600 text-white";
+                explanation = "您的得分表明可能存在中度抑郁症状，表现为持续的情绪低落、兴趣减退、睡眠或食欲改变、精力下降等，可能对日常生活产生一定影响。";
+                suggestions = "建议尽快寻求专业心理医生或精神科医生的帮助。在日常生活中，尽量保持规律的作息，适当参与一些以前喜欢的活动，与亲友保持联系并寻求支持。";
+                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-yellow-500 to-yellow-400 text-white";
             } else {
                 category = "重度抑郁";
-                explanation = "您的评估结果显示存在较明显的抑郁症状。这可能表现为持续的情绪低落、对几乎所有活动失去兴趣、明显的睡眠和食欲障碍、精力严重不足、甚至可能出现消极想法等，这些症状可能已经显著影响您的日常生活功能。";
-                suggestions = "强烈建议您尽快寻求专业的医疗帮助，如精神科医生或专业心理咨询师的评估和治疗。请不要独自面对这些困扰，及时的专业干预非常重要。您可以联系心理援助热线或前往专业医疗机构就诊。";
-                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-red-500 to-red-600 text-white";
+                explanation = "您的得分表明可能存在严重的抑郁症状，表现为持续的情绪低落、对一切事物失去兴趣、自责自罪、睡眠和食欲严重紊乱、精力严重下降，甚至可能出现自杀念头，明显影响日常生活功能。";
+                suggestions = "强烈建议立即寻求专业医疗帮助，最好是精神科医生的评估和治疗。请不要独自面对这些困扰，家人和朋友的支持非常重要。如果出现自杀念头，请立即联系心理危机干预热线或前往最近的医院急诊。";
+                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-red-500 to-red-400 text-white";
             }
             
+            // 更新结果显示
+            totalScoreElement.textContent = standardScore;
             scoreCategoryElement.textContent = category;
-            resultExplanationElement.textContent = explanation;
-            resultSuggestionsElement.textContent = suggestions;
+            resultExplanationElement.innerHTML = `<p>${explanation}</p>`;
+            resultSuggestionsElement.innerHTML = `<p>${suggestions}</p>`;
         }
 
         // 重新评估
         restartBtn.addEventListener('click', () => {
-            // 重置状态
+            // 重置变量
             currentQuestionIndex = 0;
-            for (let key in answers) {
-                delete answers[key];
-            }
+            Object.keys(answers).forEach(key => delete answers[key]);
             
-            // 隐藏结果部分，显示评估部分
+            // 更新UI
             resultsSection.classList.add('hidden');
             assessmentSection.classList.remove('hidden');
-            
-            // 重新渲染第一题和更新进度
             renderQuestion(currentQuestionIndex);
             updateProgress();
             
