@@ -83,35 +83,30 @@
     </footer>
 
     <script>
-        // 从环境变量获取量表列表并渲染
+        // 从数组常量获取量表列表并渲染
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('scales-container');
             const noScalesMsg = document.getElementById('no-scales');
             
-            // 获取环境变量中的量表配置
-            const scalesConfig = window.__ENV?.SCALES || '';
+            // 量表配置数组 - 每个对象包含name(量表名)和filename(文件名，不含扩展名)
+            const scalesConfig = [
+                { name: '抑郁自评量表', filename: 'SDS' },
+                { name: '杨氏躁狂量表', filename: 'YMRS' },
+            ];
             
-            // 解析配置 - 使用换行符分割而不是逗号
-            if (scalesConfig.trim()) {
-                // 按换行符分割，同时过滤空行
-                const scales = scalesConfig.split('\n')
-                    .map(line => line.trim())
-                    .filter(line => line) // 过滤空行
-                    .map(scale => {
-                        const [name, filename] = scale.split('#');
-                        return {
-                            name: name ? name.trim() : '',
-                            filename: filename ? filename.trim() : ''
-                        };
-                    })
-                    .filter(scale => scale.name && scale.filename); // 过滤无效条目
+            // 检查数组是否有数据
+            if (scalesConfig.length > 0) {
+                // 过滤无效条目（确保name和filename都存在）
+                const validScales = scalesConfig.filter(scale => 
+                    scale.name && scale.filename
+                );
                 
-                if (scales.length > 0) {
+                if (validScales.length > 0) {
                     // 清空加载提示
                     container.innerHTML = '';
                     
                     // 渲染量表卡片
-                    scales.forEach(scale => {
+                    validScales.forEach(scale => {
                         const card = document.createElement('div');
                         card.className = 'bg-white rounded-xl shadow-md overflow-hidden card-hover';
                         card.innerHTML = `
@@ -129,12 +124,12 @@
                         container.appendChild(card);
                     });
                 } else {
-                    // 配置格式错误
+                    // 所有条目都无效
                     container.innerHTML = '';
                     noScalesMsg.classList.remove('hidden');
                 }
             } else {
-                // 无配置
+                // 数组为空
                 container.innerHTML = '';
                 noScalesMsg.classList.remove('hidden');
             }
