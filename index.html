@@ -37,8 +37,20 @@
             }
         }
     </style>
+    <style>
+        /* 添加过渡效果使布局变化更平滑 */
+        body {
+            transition: min-height 0.3s ease;
+        }
+        footer {
+            transition: all 0.3s ease;
+        }
+        .content-wrapper {
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
-<!-- 修改body的类，使用flex布局 -->
+<!-- 使用Flexbox布局确保页脚在底部 -->
 <body class="bg-gradient-to-b from-neutral-100 to-white min-h-screen flex flex-col">
     <!-- 顶部导航 -->
     <header class="bg-white shadow-sm sticky top-0 z-10">
@@ -50,8 +62,8 @@
         </div>
     </header>
 
-    <!-- 添加内容容器，让它自动填充空间 -->
-    <div class="flex-grow">
+    <!-- 内容区域自动填充空间，将页脚推到底部 -->
+    <div class="content-wrapper flex-grow">
         <main class="container mx-auto px-4 py-12">
             <!-- 页面标题 -->
             <div class="text-center mb-16">
@@ -79,8 +91,8 @@
         </main>
     </div>
 
-    <!-- 页脚会自动推到页面底部 -->
-    <footer class="bg-neutral-800 text-white py-8 mt-20">
+    <!-- 页脚 -->
+    <footer class="bg-neutral-800 text-white py-8 mt-auto">
         <div class="container mx-auto px-4 text-center">
             <p class="mb-2">重要提示：本工具仅作为初步筛查参考，不能替代专业医疗诊断</p>
             <p class="text-sm text-neutral-400">&copy; 2023 精神科量表工具 | 部署于 Cloudflare Pages</p>
@@ -138,6 +150,12 @@
                 container.innerHTML = '';
                 noScalesMsg.classList.remove('hidden');
             }
+        });
+
+        // 监听窗口大小变化，添加平滑过渡效果
+        window.addEventListener('resize', () => {
+            // 触发重排，使过渡效果更流畅
+            document.body.offsetHeight;
         });
     </script>
 </body>
