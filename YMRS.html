@@ -95,18 +95,17 @@
         <!-- 英雄区域 -->
         <section class="relative py-20 md:py-32 overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 -z-10"></div>
-            <div class="absolute top-0 right-0 w-1/2 h-full bg-[url('https://picsum.photos/id/1059/800/800')] bg-cover bg-center opacity-5 -z-10"></div>
             <div class="container mx-auto px-4">
-                <div class="max-w-3xl">
+                <div class="max-w-3xl mx-auto text-center">
                     <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-neutral-800 mb-6">
-                        杨氏躁狂量表<br><span class="text-primary">(YMRS)</span>
+                        杨氏躁狂量表
                     </h1>
-                    <p class="text-[clamp(1rem,2vw,1.25rem)] text-neutral-600 mb-8 max-w-2xl text-balance">
-                        杨氏躁狂量表(YMRS)是一种标准化的心理评估工具，帮助评估躁狂症状的严重程度，为心理健康提供参考。
+                    <p class="text-[clamp(1rem,2vw,1.25rem)] text-neutral-600 mb-8 max-w-2xl mx-auto text-balance">
+                        杨氏躁狂量表是一种标准化的心理评估工具，帮助您了解自身的躁狂倾向和情绪状态，为心理健康提供参考。
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="#assessment" class="btn-primary text-center">
-                            开始评估 <i class="fa fa-arrow-right ml-2"></i>
+                            开始自评 <i class="fa fa-arrow-right ml-2"></i>
                         </a>
                         <a href="#about" class="btn-secondary text-center">
                             了解更多 <i class="fa fa-info-circle ml-2"></i>
@@ -124,8 +123,9 @@
                     <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
                 </div>
                 
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="order-2 md:order-1">
+                <!-- 单栏布局，内容居中 -->
+                <div class="max-w-3xl mx-auto">
+                    <div>
                         <h3 class="text-xl font-semibold mb-4 text-neutral-800">量表简介</h3>
                         <p class="text-neutral-600 mb-4">
                             杨氏躁狂量表(Young Mania Rating Scale, YMRS)由Young于1978年编制，是目前评估躁狂症状最常用的工具之一。
@@ -159,7 +159,7 @@
                     <p class="text-neutral-600 mt-4 max-w-2xl mx-auto">请在开始评估前仔细阅读以下说明，以确保评估结果的准确性</p>
                 </div>
                 
-                <div class="grid md:grid-cols-3 gap-8">
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     <div class="bg-white rounded-xl p-6 shadow-soft card-hover">
                         <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                             <i class="fa fa-clock-o text-primary text-2xl"></i>
@@ -203,7 +203,7 @@
         <section id="assessment" class="py-16 bg-white">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
-                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-800 mb-4">杨氏躁狂量表</h2>
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-800 mb-4">杨氏躁狂量表评估</h2>
                     <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
                     <p class="text-neutral-600 mt-4 max-w-2xl mx-auto">请根据您最近一周的实际情况，选择最符合您的选项</p>
                 </div>
@@ -280,64 +280,56 @@
                                 <i class="fa fa-info-circle text-primary mr-2"></i> 重要提示
                             </h4>
                             <p class="text-neutral-600 text-sm">
-                                本评估结果仅供参考，不能作为诊断依据。如果您感到持续的情绪波动或其他心理困扰，请及时寻求专业的医疗帮助。以下是一些可以提供帮助的资源：
+                                本评估结果仅供参考，不能作为诊断依据。如有需要，请咨询专业的心理医生或精神科医师。
                             </p>
-                            <ul class="mt-3 text-sm text-neutral-600 space-y-2">
-                                <li class="flex items-start">
-                                    <i class="fa fa-phone text-primary mt-1 mr-2"></i>
-                                    <span>心理援助热线：400-161-9995（24小时）</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fa fa-hospital-o text-primary mt-1 mr-2"></i>
-                                    <span>建议咨询专业心理医生或精神科医师</span>
-                                </li>
-                            </ul>
+                        </div>
+                        
+                        <div class="mt-8 text-center">
+                            <button id="restart-btn" class="btn-primary">
+                                重新评估 <i class="fa fa-refresh ml-2"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
-                
-                <div class="mt-10 text-center">
-                    <button id="restart-btn" class="btn-primary">
-                        <i class="fa fa-refresh mr-2"></i> 重新评估
-                    </button>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- 页脚 -->
-    <footer class="bg-neutral-800 text-neutral-300 py-12">
+    <footer class="bg-neutral-800 text-white py-12">
         <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <i class="fa fa-bolt text-white text-xl"></i>
-                        <h3 class="text-lg font-semibold text-white">杨氏躁狂量表工具</h3>
+            <div class="max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <i class="fa fa-bolt text-white text-xl"></i>
+                            <h3 class="text-lg font-semibold text-white">杨氏躁狂量表</h3>
+                        </div>
+                        <p class="text-sm text-neutral-400">
+                            提供专业的心理健康自评工具，帮助您更好地了解自己的心理状态，维护心理健康。
+                        </p>
                     </div>
-                    <p class="text-sm text-neutral-400">
-                        提供专业的心理健康自评工具，帮助您更好地了解自己的心理状态，维护心理健康。
-                    </p>
+                    
+                    <div>
+                        <h4 class="text-white font-medium mb-4">快速链接</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#about" class="text-neutral-400 hover:text-white transition-custom">关于量表</a></li>
+                            <li><a href="#instructions" class="text-neutral-400 hover:text-white transition-custom">使用说明</a></li>
+                            <li><a href="#assessment" class="text-neutral-400 hover:text-white transition-custom">开始评估</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-white font-medium mb-4">重要提示</h4>
+                        <p class="text-sm text-neutral-400">
+                            本网站提供的评估工具仅作为参考，不能替代专业医疗人员的诊断和治疗。如有严重心理困扰，请及时寻求专业帮助。
+                        </p>
+                    </div>
                 </div>
                 
-                <div>
-                    <h4 class="text-white font-medium mb-4">快速链接</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#about" class="text-neutral-400 hover:text-white transition-custom">关于量表</a></li>
-                        <li><a href="#instructions" class="text-neutral-400 hover:text-white transition-custom">使用说明</a></li>
-                        <li><a href="#assessment" class="text-neutral-400 hover:text-white transition-custom">开始评估</a></li>
-                    </ul>
+                <div class="border-t border-neutral-700 pt-8 text-center text-sm text-neutral-500">
+                    <p>&copy; 2023 杨氏躁狂量表工具 | 部署于 Cloudflare Pages</p>
                 </div>
-                
-                <div>
-                    <h4 class="text-white font-medium mb-4">重要提示</h4>
-                    <p class="text-sm text-neutral-400">
-                        本网站提供的评估工具仅作为参考，不能替代专业医疗人员的诊断和治疗。如有严重心理困扰，请及时寻求专业帮助。
-                    </p>
-                </div>
-            </div>
-            
-            <div class="border-t border-neutral-700 pt-8 text-center text-sm text-neutral-500">
-                <p>&copy; 2023 杨氏躁狂量表工具 | 部署于 Cloudflare Pages</p>
             </div>
         </div>
     </footer>
@@ -361,10 +353,10 @@
                 text: "言语（量和速度）",
                 options: [
                     { value: 0, text: "正常" },
-                    { value: 1, text: "稍多或稍快" },
-                    { value: 2, text: "言语多、快，但可打断" },
-                    { value: 3, text: "言语极多、极快，难以打断" },
-                    { value: 4, text: "言语迫促，无法打断或不连贯" }
+                    { value: 1, text: "轻度话多" },
+                    { value: 2, text: "话多，有时难以打断" },
+                    { value: 3, text: "言语迫促，明显难以打断" },
+                    { value: 4, text: "言语极快，持续且无法打断" }
                 ]
             },
             {
@@ -372,10 +364,10 @@
                 text: "活动/精力",
                 options: [
                     { value: 0, text: "正常" },
-                    { value: 1, text: "稍增加，或动作稍快" },
-                    { value: 2, text: "活动增加，或动作明显加快" },
-                    { value: 3, text: "活动显著增加，或动作过分加快" },
-                    { value: 4, text: "活动极度增加或无法安静" }
+                    { value: 1, text: "轻度活动增加或精力过剩" },
+                    { value: 2, text: "活动中度增加或精力过剩" },
+                    { value: 3, text: "活动明显增加，或夜间活动增加" },
+                    { value: 4, text: "活动极度增加，或几乎持续活动" }
                 ]
             },
             {
@@ -383,20 +375,20 @@
                 text: "性欲",
                 options: [
                     { value: 0, text: "正常" },
-                    { value: 1, text: "稍增强" },
-                    { value: 2, text: "增强，偶有不适当的性举动或言语" },
-                    { value: 3, text: "显著增强，有多次不适当的性举动或言语" },
-                    { value: 4, text: "极度增强，有无法控制的性举动" }
+                    { value: 1, text: "轻度增强" },
+                    { value: 2, text: "中度增强" },
+                    { value: 3, text: "明显增强，可能有不适当的性挑逗" },
+                    { value: 4, text: "显著增强，可能有公开的性活动" }
                 ]
             },
             {
                 id: 5,
                 text: "睡眠",
                 options: [
-                    { value: 0, text: "睡眠正常（7-8小时）" },
-                    { value: 1, text: "睡眠减少1-2小时" },
-                    { value: 2, text: "睡眠减少2-3小时" },
-                    { value: 3, text: "睡眠减少3-4小时" },
+                    { value: 0, text: "正常睡眠需求" },
+                    { value: 1, text: "睡眠减少1小时" },
+                    { value: 2, text: "睡眠减少2小时" },
+                    { value: 3, text: "睡眠减少3小时" },
                     { value: 4, text: "几乎整夜不眠" }
                 ]
             },
@@ -404,44 +396,44 @@
                 id: 6,
                 text: "易激惹",
                 options: [
-                    { value: 0, text: "无" },
-                    { value: 1, text: "略显易怒" },
-                    { value: 2, text: "易激惹，偶尔发脾气" },
-                    { value: 3, text: "明显易激惹，常有发脾气" },
-                    { value: 4, text: "极度易激惹，持续发脾气或攻击行为" }
+                    { value: 0, text: "正常" },
+                    { value: 1, text: "轻度易激惹" },
+                    { value: 2, text: "中度易激惹，偶有发怒" },
+                    { value: 3, text: "明显易激惹，经常发怒" },
+                    { value: 4, text: "极度易激惹，持续发怒或攻击行为" }
                 ]
             },
             {
                 id: 7,
                 text: "语言/思维障碍",
                 options: [
-                    { value: 0, text: "无" },
-                    { value: 1, text: "思维奔逸或联想加快" },
-                    { value: 2, text: "思维奔逸明显" },
-                    { value: 3, text: "思维奔逸严重，有压力言语" },
-                    { value: 4, text: "思维不连贯或语词杂拌" }
+                    { value: 0, text: "正常" },
+                    { value: 1, text: "思维联想轻度加快或轻度言语压力感" },
+                    { value: 2, text: "思维联想中度加快或言语压力感" },
+                    { value: 3, text: "思维奔逸或明显言语压力感" },
+                    { value: 4, text: "思维跳跃、观念飘忽或言语不连贯" }
                 ]
             },
             {
                 id: 8,
-                text: "内容（思维）",
+                text: "思维内容",
                 options: [
                     { value: 0, text: "正常" },
-                    { value: 1, text: "多疑或自负" },
-                    { value: 2, text: "有夸大观念或关系妄想" },
-                    { value: 3, text: "明显夸大妄想或关系妄想" },
-                    { value: 4, text: "持续的幻觉或妄想" }
+                    { value: 1, text: "轻度夸大或轻度多疑" },
+                    { value: 2, text: "中度夸大或多疑" },
+                    { value: 3, text: "明显夸大或多疑" },
+                    { value: 4, text: "妄想性夸大或被害妄想" }
                 ]
             },
             {
                 id: 9,
-                text: "破坏行为",
+                text: "破坏行为/判断障碍",
                 options: [
-                    { value: 0, text: "无" },
-                    { value: 1, text: "注意力分散，难以坚持活动" },
-                    { value: 2, text: "活动过多，需要他人干预" },
-                    { value: 3, text: "有破坏行为，需限制活动" },
-                    { value: 4, text: "有严重破坏行为或对他人造成危险" }
+                    { value: 0, text: "正常" },
+                    { value: 1, text: "判断力轻度受损，或轻度挥霍" },
+                    { value: 2, text: "判断力中度受损，或明显挥霍" },
+                    { value: 3, text: "判断力严重受损，或冲动行为" },
+                    { value: 4, text: "明显的破坏行为，或危险行为" }
                 ]
             },
             {
@@ -449,21 +441,21 @@
                 text: "外貌",
                 options: [
                     { value: 0, text: "正常" },
-                    { value: 1, text: "略显不整洁或修饰过度" },
-                    { value: 2, text: "明显不整洁或过度修饰" },
-                    { value: 3, text: "不整洁或过度修饰，引人注意" },
-                    { value: 4, text: "外貌极不适当或怪异" }
+                    { value: 1, text: "轻度异常（如修饰过度或不整）" },
+                    { value: 2, text: "中度异常" },
+                    { value: 3, text: "明显异常" },
+                    { value: 4, text: "极度异常" }
                 ]
             },
             {
                 id: 11,
                 text: "洞察力",
                 options: [
-                    { value: 0, text: "存在（知道自己有病）" },
-                    { value: 1, text: "部分存在（对某些症状有认识）" },
-                    { value: 2, text: "大部分缺乏（否认大部分症状）" },
-                    { value: 3, text: "完全缺乏（完全否认有病）" },
-                    { value: 4, text: "完全缺乏，且坚信自己的想法，拒绝治疗" }
+                    { value: 0, text: "承认有问题" },
+                    { value: 1, text: "对问题有部分认识" },
+                    { value: 2, text: "认识模糊，大部分不承认有问题" },
+                    { value: 3, text: "完全不承认有问题" },
+                    { value: 4, text: "完全否认有问题，并有反向指责" }
                 ]
             }
         ];
@@ -545,22 +537,22 @@
                 questionContainer.innerHTML = `
                     <div class="mb-6">
                         <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-4">
-                            第 ${question.id} 题 / 共 11 题
+                            第 ${index + 1} 题 / 共 ${questions.length} 题
                         </span>
                         <h3 class="text-xl font-semibold text-neutral-800">${question.text}</h3>
                     </div>
-                    <div class="options">
+                    <div class="question-options">
                         ${optionsHtml}
                     </div>
                 `;
                 
-                // 为选项添加事件监听器
+                // 为选项添加事件监听
                 const radioInputs = questionContainer.querySelectorAll('input[type="radio"]');
                 radioInputs.forEach(input => {
                     input.addEventListener('change', (e) => {
                         answers[question.id] = parseInt(e.target.value);
-                        // 更新选项样式
                         updateOptionStyles(question.id);
+                        updateProgress();
                     });
                 });
                 
@@ -597,11 +589,7 @@
             progressText.textContent = `${answeredCount}/${questions.length}`;
             
             // 更新按钮状态
-            if (currentQuestionIndex === 0) {
-                prevBtn.classList.add('hidden');
-            } else {
-                prevBtn.classList.remove('hidden');
-            }
+            prevBtn.classList.toggle('hidden', currentQuestionIndex === 0);
             
             if (currentQuestionIndex === questions.length - 1) {
                 nextBtn.classList.add('hidden');
@@ -612,78 +600,39 @@
             }
         }
 
-        // 下一题
-        nextBtn.addEventListener('click', () => {
-            // 检查当前题是否已回答
-            if (answers[questions[currentQuestionIndex].id] === undefined) {
-                alert('请选择一个选项后再继续');
-                return;
-            }
-            
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                renderQuestion(currentQuestionIndex);
-                updateProgress();
-                
-                // 滚动到题目顶部
-                window.scrollTo({
-                    top: questionContainer.offsetTop - 100,
-                    behavior: 'smooth'
-                });
-            }
-        });
-
         // 上一题
         prevBtn.addEventListener('click', () => {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
                 renderQuestion(currentQuestionIndex);
                 updateProgress();
-                
-                // 滚动到题目顶部
-                window.scrollTo({
-                    top: questionContainer.offsetTop - 100,
-                    behavior: 'smooth'
-                });
+            }
+        });
+
+        // 下一题
+        nextBtn.addEventListener('click', () => {
+            // 如果当前题未回答，自动选择第一个选项
+            if (!answers[questions[currentQuestionIndex].id]) {
+                answers[questions[currentQuestionIndex].id] = questions[currentQuestionIndex].options[0].value;
+            }
+            
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion(currentQuestionIndex);
+                updateProgress();
             }
         });
 
         // 提交评估
         submitBtn.addEventListener('click', () => {
-            // 检查最后一题是否已回答
-            if (answers[questions[currentQuestionIndex].id] === undefined) {
-                alert('请选择一个选项后再提交');
-                return;
-            }
-            
-            // 检查是否所有题目都已回答
-            if (Object.keys(answers).length !== questions.length) {
-                if (!confirm('您还有未完成的题目，确定要提交吗？')) {
-                    return;
-                }
+            // 确保最后一题已回答
+            if (!answers[questions[currentQuestionIndex].id]) {
+                answers[questions[currentQuestionIndex].id] = questions[currentQuestionIndex].options[0].value;
             }
             
             // 计算总分
-            calculateScore();
-            
-            // 显示结果部分，隐藏评估部分
-            assessmentSection.classList.add('hidden');
-            resultsSection.classList.remove('hidden');
-            
-            // 滚动到结果部分
-            window.scrollTo({
-                top: resultsSection.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        });
-
-        // 计算总分并显示结果
-        function calculateScore() {
             let totalScore = 0;
-            
-            // 计算总分
             questions.forEach(question => {
-                // 如果有未回答的题目，按0分计算
                 totalScore += answers[question.id] || 0;
             });
             
@@ -707,9 +656,9 @@
                 document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-yellow-500 to-yellow-400 text-white";
             } else {
                 category = "严重躁狂";
-                explanation = "您的得分表明可能存在严重的躁狂症状，表现为极度兴奋、言语迫促、活动过多、思维紊乱、可能出现妄想或幻觉，明显影响日常生活功能。";
-                suggestions = "强烈建议立即寻求专业医疗帮助，最好是精神科医生的评估和治疗。在专业帮助到来之前，应确保所处环境安全，避免可能的冲动行为或危险情况。";
-                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-orange-500 to-orange-400 text-white";
+                explanation = "您的得分表明可能存在严重的躁狂症状，表现为极度兴奋、言语思维加速、活动明显增多、睡眠需求显著减少、判断力受损，可能出现冲动或危险行为，明显影响日常生活功能。";
+                suggestions = "强烈建议立即寻求专业医疗帮助，最好是精神科医生的评估和治疗。请不要独自面对这些困扰，家人和朋友的支持非常重要。如果出现危险行为倾向，请立即联系心理危机干预热线或前往最近的医院急诊。";
+                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-red-500 to-red-400 text-white";
             }
             
             // 更新结果显示
@@ -717,7 +666,17 @@
             scoreCategoryElement.textContent = category;
             resultExplanationElement.innerHTML = `<p>${explanation}</p>`;
             resultSuggestionsElement.innerHTML = `<p>${suggestions}</p>`;
-        }
+            
+            // 显示结果部分，隐藏评估部分
+            assessmentSection.classList.add('hidden');
+            resultsSection.classList.remove('hidden');
+            
+            // 滚动到结果部分
+            window.scrollTo({
+                top: resultsSection.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        });
 
         // 重新评估
         restartBtn.addEventListener('click', () => {
