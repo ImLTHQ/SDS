@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精神科量表选择</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        neutral: {
+                            100: '#F3F4F6',
+                            200: '#E5E7EB',
+                            800: '#1F2937',
+                            900: '#111827',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .btn-primary {
+                @apply bg-primary text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-neutral-100 to-white min-h-screen">
+    <!-- 顶部导航 -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-heartbeat text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-neutral-800">精神科量表工具</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <!-- 页面标题 -->
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-800 mb-4">量表选择</h2>
+            <div class="w-20 h-1 bg-primary mx-auto rounded-full mb-6"></div>
+            <p class="text-neutral-600 max-w-2xl mx-auto">
+                请选择您需要进行的评估量表，点击对应按钮进入评估页面
+            </p>
+        </div>
+
+        <!-- 量表卡片容器 -->
+        <div id="scales-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <!-- 加载提示 -->
+            <div class="col-span-full text-center py-16">
+                <i class="fa fa-circle-o-notch fa-spin text-primary text-3xl mb-4"></i>
+                <p class="text-neutral-600">加载量表列表中...</p>
+            </div>
+        </div>
+
+        <!-- 无量表提示 (默认隐藏) -->
+        <div id="no-scales" class="hidden text-center py-16 max-w-2xl mx-auto">
+            <i class="fa fa-info-circle text-neutral-400 text-3xl mb-4"></i>
+            <p class="text-neutral-600">未配置任何量表，请联系管理员添加量表信息</p>
+        </div>
+    </main>
+
+    <footer class="bg-neutral-800 text-white py-8 mt-20">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">重要提示：本工具仅作为初步筛查参考，不能替代专业医疗诊断</p>
+            <p class="text-sm text-neutral-400">&copy; 2023 精神科量表工具 | 部署于 Cloudflare Pages</p>
+        </div>
+    </footer>
+
+    <script>
+        // 从环境变量获取量表列表并渲染
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('scales-container');
+            const noScalesMsg = document.getElementById('no-scales');
+            
+            // 获取环境变量中的量表配置
+            const scalesConfig = window.__ENV?.SCALES || '';
+            
+            // 解析配置 - 使用换行符分割而不是逗号
+            if (scalesConfig.trim()) {
+                // 按换行符分割，同时过滤空行
+                const scales = scalesConfig.split('\n')
+                    .map(line => line.trim())
+                    .filter(line => line) // 过滤空行
+                    .map(scale => {
+                        const [name, filename] = scale.split('#');
+                        return {
+                            name: name ? name.trim() : '',
+                            filename: filename ? filename.trim() : ''
+                        };
+                    })
+                    .filter(scale => scale.name && scale.filename); // 过滤无效条目
+                
+                if (scales.length > 0) {
+                    // 清空加载提示
+                    container.innerHTML = '';
+                    
+                    // 渲染量表卡片
+                    scales.forEach(scale => {
+                        const card = document.createElement('div');
+                        card.className = 'bg-white rounded-xl shadow-md overflow-hidden card-hover';
+                        card.innerHTML = `
+                            <div class="p-6">
+                                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                                    <i class="fa fa-list-alt text-primary text-xl"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold mb-2 text-neutral-800">${scale.name}</h3>
+                                <p class="text-neutral-600 text-sm mb-4">点击下方按钮开始评估</p>
+                                <a href="${scale.filename}.html" class="btn-primary w-full inline-block text-center">
+                                    开始评估 <i class="fa fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                } else {
+                    // 配置格式错误
+                    container.innerHTML = '';
+                    noScalesMsg.classList.remove('hidden');
+                }
+            } else {
+                // 无配置
+                container.innerHTML = '';
+                noScalesMsg.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
