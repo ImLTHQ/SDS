@@ -38,7 +38,8 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-b from-neutral-100 to-white min-h-screen">
+<!-- 修改body的类，使用flex布局 -->
+<body class="bg-gradient-to-b from-neutral-100 to-white min-h-screen flex flex-col">
     <!-- 顶部导航 -->
     <header class="bg-white shadow-sm sticky top-0 z-10">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -49,32 +50,36 @@
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-12">
-        <!-- 页面标题 -->
-        <div class="text-center mb-16">
-            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-800 mb-4">量表选择</h2>
-            <div class="w-20 h-1 bg-primary mx-auto rounded-full mb-6"></div>
-            <p class="text-neutral-600 max-w-2xl mx-auto">
-                请选择您需要进行的评估量表，点击对应按钮进入评估页面
-            </p>
-        </div>
-
-        <!-- 量表卡片容器 -->
-        <div id="scales-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <!-- 加载提示 -->
-            <div class="col-span-full text-center py-16">
-                <i class="fa fa-circle-o-notch fa-spin text-primary text-3xl mb-4"></i>
-                <p class="text-neutral-600">加载量表列表中...</p>
+    <!-- 添加内容容器，让它自动填充空间 -->
+    <div class="flex-grow">
+        <main class="container mx-auto px-4 py-12">
+            <!-- 页面标题 -->
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-neutral-800 mb-4">量表选择</h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full mb-6"></div>
+                <p class="text-neutral-600 max-w-2xl mx-auto">
+                    请选择您需要进行的评估量表，点击对应按钮进入评估页面
+                </p>
             </div>
-        </div>
 
-        <!-- 无量表提示 (默认隐藏) -->
-        <div id="no-scales" class="hidden text-center py-16 max-w-2xl mx-auto">
-            <i class="fa fa-info-circle text-neutral-400 text-3xl mb-4"></i>
-            <p class="text-neutral-600">未配置任何量表，请联系管理员添加量表信息</p>
-        </div>
-    </main>
+            <!-- 量表卡片容器 -->
+            <div id="scales-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- 加载提示 -->
+                <div class="col-span-full text-center py-16">
+                    <i class="fa fa-circle-o-notch fa-spin text-primary text-3xl mb-4"></i>
+                    <p class="text-neutral-600">加载量表列表中...</p>
+                </div>
+            </div>
 
+            <!-- 无量表提示 (默认隐藏) -->
+            <div id="no-scales" class="hidden text-center py-16 max-w-2xl mx-auto">
+                <i class="fa fa-info-circle text-neutral-400 text-3xl mb-4"></i>
+                <p class="text-neutral-600">未配置任何量表，请联系管理员添加量表信息</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚会自动推到页面底部 -->
     <footer class="bg-neutral-800 text-white py-8 mt-20">
         <div class="container mx-auto px-4 text-center">
             <p class="mb-2">重要提示：本工具仅作为初步筛查参考，不能替代专业医疗诊断</p>
