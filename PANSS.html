@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANSS - 阳性和阴性综合征量表</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        // 配置Tailwind自定义主题
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10B981', // 主色调：绿色，传达希望和平衡
+                        secondary: '#6366F1', // 辅助色：靛蓝色，用于强调和交互元素
+                        neutral: {
+                            100: '#F3F4F6',
+                            200: '#E5E7EB',
+                            300: '#D1D5DB',
+                            400: '#9CA3AF',
+                            500: '#6B7280',
+                            600: '#4B5563',
+                            700: '#374151',
+                            800: '#1F2937',
+                            900: '#111827',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px rgba(0, 0, 0, 0.05)',
+                        'medium': '0 4px 20px rgba(0, 0, 0, 0.08)',
+                        'strong': '0 8px 30px rgba(0, 0, 0, 0.12)',
+                    }
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .transition-custom {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .card-hover {
+                @apply hover:shadow-medium hover:-translate-y-1 transition-custom;
+            }
+            .btn-primary {
+                @apply bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary/90 active:bg-primary/80 transition-custom focus:outline-none focus:ring-2 focus:ring-primary/50;
+            }
+            .btn-secondary {
+                @apply bg-white text-primary border border-primary px-6 py-3 rounded-lg font-medium hover:bg-primary/5 active:bg-primary/10 transition-custom focus:outline-none focus:ring-2 focus:ring-primary/50;
+            }
+            .btn-accent {
+                @apply bg-secondary text-white px-6 py-3 rounded-lg font-medium hover:bg-secondary/90 active:bg-secondary/80 transition-custom focus:outline-none focus:ring-2 focus:ring-secondary/50;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-neutral-100 to-white text-neutral-800 min-h-screen font-sans">
+    <!-- 顶部导航栏 -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-soft transition-custom">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-stethoscope text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-neutral-800">阳性和阴性综合征量表</h1>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-neutral-600 hover:text-primary transition-custom">关于量表</a>
+                <a href="#instructions" class="text-neutral-600 hover:text-primary transition-custom">使用说明</a>
+                <a href="#assessment" class="btn-primary">开始评估</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-neutral-600 hover:text-primary transition-custom">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-neutral-200">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#about" class="text-neutral-600 hover:text-primary py-2 transition-custom">关于量表</a>
+                <a href="#instructions" class="text-neutral-600 hover:text-primary py-2 transition-custom">使用说明</a>
+                <a href="#assessment" class="btn-primary text-center">开始评估</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 英雄区域 -->
+        <section class="relative py-20 md:py-32 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 -z-10"></div>
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-neutral-800 mb-6">
+                        阳性和阴性综合征量表
+                    </h1>
+                    <p class="text-[clamp(1rem,2vw,1.25rem)] text-neutral-600 mb-8 max-w-2xl mx-auto text-balance">
+                        PANSS是评估精神分裂症患者症状严重程度的标准化工具，包含阳性症状、阴性症状和一般精神病理三个分量表，共30个条目。
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#assessment" class="btn-primary text-center">
+                            开始评估 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#about" class="btn-secondary text-center">
+                            了解更多 <i class="fa fa-info-circle ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于量表 -->
+        <section id="about" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-800 mb-4">关于PANSS量表</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+                </div>
+                
+                <!-- 单栏布局，内容居中 -->
+                <div class="max-w-3xl mx-auto">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-neutral-800">量表简介</h3>
+                        <p class="text-neutral-600 mb-4">
+                            阳性和阴性综合征量表(Positive and Negative Syndrome Scale, PANSS)由Kay等人于1987年编制，是目前国际上广泛用于评估精神分裂症症状严重程度的量表之一。
+                        </p>
+                        <p class="text-neutral-600 mb-4">
+                            该量表包含30个项目，分为三个分量表：
+                        </p>
+                        <ul class="list-disc pl-6 text-neutral-600 mb-4 space-y-2">
+                            <li><span class="font-medium">阳性症状量表</span>：包含7个项目，评估幻觉、妄想等阳性症状</li>
+                            <li><span class="font-medium">阴性症状量表</span>：包含7个项目，评估情感淡漠、意志缺乏等阴性症状</li>
+                            <li><span class="font-medium">一般精神病理量表</span>：包含16个项目，评估焦虑、抑郁、兴奋等其他精神病理症状</li>
+                        </ul>
+                        <p class="text-neutral-600">
+                            每个项目采用1-7分的7级评分法，评分越高表示症状越严重。请注意：本量表主要用于专业人员评估，此处提供的版本仅供参考，不能替代专业医疗人员的诊断。
+                        </p>
+                        
+                        <div class="mt-8 bg-primary/5 p-6 rounded-lg border border-primary/10">
+                            <div class="flex items-start">
+                                <i class="fa fa-lightbulb-o text-primary text-xl mt-1 mr-4"></i>
+                                <p class="text-neutral-700">
+                                    量表结果仅供参考，不能作为诊断依据。精神分裂症的诊断需要由专业精神科医师根据完整的临床检查做出。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 使用说明 -->
+        <section id="instructions" class="py-16 bg-neutral-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-800 mb-4">使用说明</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+                    <p class="text-neutral-600 mt-4 max-w-2xl mx-auto">请在开始评估前仔细阅读以下说明，以确保评估结果的准确性</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-white rounded-xl p-6 shadow-soft card-hover">
+                        <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                            <i class="fa fa-clock-o text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3 text-neutral-800">评估时间</h3>
+                        <p class="text-neutral-600">
+                            整个评估过程大约需要10-15分钟，请确保您有足够的时间完成所有题目，仔细阅读每个问题。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-soft card-hover">
+                        <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                            <i class="fa fa-check-circle text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3 text-neutral-800">作答方式</h3>
+                        <p class="text-neutral-600">
+                            请根据最近一周内的实际情况，选择最符合的选项。每个题目采用1-7分评分，1分表示无此症状，7分表示症状极严重。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-soft card-hover">
+                        <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                            <i class="fa fa-heart text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-3 text-neutral-800">评估对象</h3>
+                        <p class="text-neutral-600">
+                            可由本人自评，也可由熟悉情况的亲友评估。请如实回答每个问题，真实的回答才能反映实际情况。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <a href="#assessment" class="btn-primary inline-block">
+                        我已了解，开始评估 <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 评估部分 -->
+        <section id="assessment" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-800 mb-4">阳性和阴性综合征量表</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+                    <p class="text-neutral-600 mt-4 max-w-2xl mx-auto">请根据最近一周的实际情况，选择最符合的选项（1=无，7=极严重）</p>
+                </div>
+                
+                <!-- 进度条 -->
+                <div class="max-w-3xl mx-auto mb-10">
+                    <div class="flex justify-between text-sm text-neutral-500 mb-2">
+                        <span>进度</span>
+                        <span id="progress-text">0/30</span>
+                    </div>
+                    <div class="h-2 bg-neutral-200 rounded-full overflow-hidden">
+                        <div id="progress-bar" class="h-full bg-primary rounded-full w-0 transition-all duration-300"></div>
+                    </div>
+                </div>
+                
+                <!-- 题目容器 -->
+                <div class="max-w-3xl mx-auto">
+                    <div id="question-container" class="bg-white rounded-xl shadow-medium p-6 md:p-8 mb-8 transition-custom">
+                        <!-- 题目会通过JavaScript动态加载 -->
+                        <div class="text-center py-12">
+                            <i class="fa fa-circle-o-notch fa-spin text-primary text-3xl mb-4"></i>
+                            <p class="text-neutral-600">加载题目中...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 导航按钮 -->
+                    <div class="flex justify-between">
+                        <button id="prev-btn" class="btn-secondary hidden">
+                            <i class="fa fa-arrow-left mr-2"></i> 上一题
+                        </button>
+                        <div class="ml-auto">
+                            <button id="next-btn" class="btn-primary">
+                                下一题 <i class="fa fa-arrow-right ml-2"></i>
+                            </button>
+                            <button id="submit-btn" class="btn-accent hidden">
+                                提交评估 <i class="fa fa-check ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 结果部分 (默认隐藏) -->
+        <section id="results" class="py-16 bg-neutral-50 hidden">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-800 mb-4">您的评估结果</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-medium overflow-hidden">
+                    <!-- 结果分数卡片 -->
+                    <div id="score-card" class="p-8 text-center bg-gradient-to-r from-primary to-primary/80 text-white">
+                        <h3 class="text-xl font-semibold mb-6">量表得分</h3>
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <div class="text-sm mb-1">阳性症状分</div>
+                                <div class="text-[clamp(1.5rem,5vw,2.5rem)] font-bold" id="positive-score">0</div>
+                            </div>
+                            <div>
+                                <div class="text-sm mb-1">阴性症状分</div>
+                                <div class="text-[clamp(1.5rem,5vw,2.5rem)] font-bold" id="negative-score">0</div>
+                            </div>
+                            <div>
+                                <div class="text-sm mb-1">总评分</div>
+                                <div class="text-[clamp(1.5rem,5vw,2.5rem)] font-bold" id="total-score">0</div>
+                            </div>
+                        </div>
+                        <div class="text-xl font-medium" id="score-category">症状较轻</div>
+                    </div>
+                    
+                    <!-- 结果解释 -->
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold mb-4 text-neutral-800">结果解释</h3>
+                        <div id="result-explanation" class="text-neutral-600 mb-6">
+                            <!-- 结果解释会通过JavaScript动态加载 -->
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-neutral-800">建议</h3>
+                        <div id="result-suggestions" class="text-neutral-600 mb-8">
+                            <!-- 建议会通过JavaScript动态加载 -->
+                        </div>
+                        
+                        <div class="bg-neutral-50 p-6 rounded-lg border border-neutral-200">
+                            <h4 class="font-medium text-neutral-800 mb-2 flex items-center">
+                                <i class="fa fa-info-circle text-primary mr-2"></i> 重要提示
+                            </h4>
+                            <p class="text-neutral-600 text-sm">
+                                本评估结果仅供参考，不能作为诊断依据。如果您或他人有明显的精神症状困扰，请及时寻求专业的医疗帮助。以下是一些可以提供帮助的资源：
+                            </p>
+                            <ul class="mt-3 text-sm text-neutral-600 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fa fa-phone text-primary mt-1 mr-2"></i>
+                                    <span>心理援助热线：400-161-9995（24小时）</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-hospital-o text-primary mt-1 mr-2"></i>
+                                    <span>建议咨询专业精神科医师或心理医生</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-10 text-center">
+                    <button id="restart-btn" class="btn-primary">
+                        <i class="fa fa-refresh mr-2"></i> 重新评估
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-neutral-800 text-neutral-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8 max-w-5xl mx-auto">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fa fa-stethoscope text-white text-xl"></i>
+                        <h3 class="text-lg font-semibold text-white">阳性和阴性综合征量表</h3>
+                    </div>
+                    <p class="text-sm text-neutral-400">
+                        提供专业的心理健康评估工具，帮助了解精神症状严重程度，为专业咨询提供参考。
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-medium mb-4">快速链接</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="text-neutral-400 hover:text-white transition-custom">返回首页</a></li>
+                        <li><a href="#about" class="text-neutral-400 hover:text-white transition-custom">关于量表</a></li>
+                        <li><a href="#instructions" class="text-neutral-400 hover:text-white transition-custom">使用说明</a></li>
+                        <li><a href="#assessment" class="text-neutral-400 hover:text-white transition-custom">开始评估</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-medium mb-4">重要提示</h4>
+                    <p class="text-sm text-neutral-400">
+                        本网站提供的评估工具仅作为参考，不能替代专业医疗人员的诊断和治疗。如有严重心理困扰，请及时寻求专业帮助。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-neutral-700 pt-8 text-center text-sm text-neutral-500">
+                <p>&copy; 2025 心理健康评估工具 | 部署于 Cloudflare Pages</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // PANSS量表题目数据
+        const questions = [
+            // 阳性症状量表 (7题)
+            {
+                id: 1,
+                text: "妄想",
+                dimension: "positive",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 2,
+                text: "概念紊乱（联想散漫）",
+                dimension: "positive",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 3,
+                text: "幻觉行为",
+                dimension: "positive",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 4,
+                text: "兴奋",
+                dimension: "positive",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 5,
+                text: "夸大",
+                dimension: "positive",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 6,
+                text: "猜疑/被害",
+                dimension: "positive",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 7,
+                text: "敌对性",
+                dimension: "positive",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            
+            // 阴性症状量表 (7题)
+            {
+                id: 8,
+                text: "情感迟钝",
+                dimension: "negative",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 9,
+                text: "情绪退缩",
+                dimension: "negative",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 10,
+                text: "情感交流障碍",
+                dimension: "negative",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 11,
+                text: "被动/淡漠社交退缩",
+                dimension: "negative",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 12,
+                text: "抽象思维困难",
+                dimension: "negative",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 13,
+                text: "交谈缺乏自发性和流畅性",
+                dimension: "negative",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 14,
+                text: "刻板思维",
+                dimension: "negative",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            
+            // 一般精神病理量表 (16题)
+            {
+                id: 15,
+                text: "关注身体健康",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 16,
+                text: "焦虑",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 17,
+                text: "自罪感",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 18,
+                text: "紧张",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 19,
+                text: "装相和作态",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 20,
+                text: "抑郁",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 21,
+                text: "动作迟缓",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 22,
+                text: "不合作",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 23,
+                text: "异常思维内容",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 24,
+                text: "定向障碍",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 25,
+                text: "注意障碍",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 26,
+                text: "判断和自知力缺乏",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 27,
+                text: "意志障碍",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 28,
+                text: "冲动控制障碍",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 29,
+                text: "先占观念",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            },
+            {
+                id: 30,
+                text: "主动回避社交",
+                dimension: "general",
+                options: [
+                    { value: 1, text: "1-无" },
+                    { value: 2, text: "2-很轻" },
+                    { value: 3, text: "3-轻度" },
+                    { value: 4, text: "4-中度" },
+                    { value: 5, text: "5-偏重" },
+                    { value: 6, text: "6-重度" },
+                    { value: 7, text: "7-极重度" }
+                ]
+            }
+        ];
+
+        // 存储用户答案
+        const answers = {};
+        let currentQuestionIndex = 0;
+
+        // DOM元素
+        const questionContainer = document.getElementById('question-container');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const assessmentSection = document.getElementById('assessment');
+        const resultsSection = document.getElementById('results');
+        const totalScoreElement = document.getElementById('total-score');
+        const positiveScoreElement = document.getElementById('positive-score');
+        const negativeScoreElement = document.getElementById('negative-score');
+        const scoreCategoryElement = document.getElementById('score-category');
+        const resultExplanationElement = document.getElementById('result-explanation');
+        const resultSuggestionsElement = document.getElementById('result-suggestions');
+        const restartBtn = document.getElementById('restart-btn');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // 移动端菜单切换
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // 初始化页面
+        function init() {
+            renderQuestion(currentQuestionIndex);
+            updateProgress();
+        }
+
+        // 渲染当前题目
+        function renderQuestion(index) {
+            const question = questions[index];
+            
+            // 添加淡出动画
+            questionContainer.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                let optionsHtml = '';
+                question.options.forEach(option => {
+                    const isSelected = answers[question.id] === option.value;
+                    optionsHtml += `
+                        <div class="mb-3">
+                            <label class="flex items-center p-4 border rounded-lg cursor-pointer transition-custom hover:border-primary ${isSelected ? 'border-primary bg-primary/5' : 'border-neutral-200 hover:bg-neutral-50'}">
+                                <input type="radio" name="question-${question.id}" value="${option.value}" class="mr-3 text-primary focus:ring-primary" ${isSelected ? 'checked' : ''}>
+                                <span>${option.text}</span>
+                            </label>
+                        </div>
+                    `;
+                });
+                
+                // 确定题目维度标签
+                let dimensionLabel = '';
+                if (question.dimension === 'positive') {
+                    dimensionLabel = '<span class="bg-secondary/10 text-secondary">阳性症状</span>';
+                } else if (question.dimension === 'negative') {
+                    dimensionLabel = '<span class="bg-red-100 text-red-600">阴性症状</span>';
+                } else {
+                    dimensionLabel = '<span class="bg-neutral-100 text-neutral-600">一般精神病理</span>';
+                }
+                
+                questionContainer.innerHTML = `
+                    <div class="mb-6">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full">
+                                第 ${question.id} 题 / 共 30 题
+                            </span>
+                            ${dimensionLabel}
+                        </div>
+                        <h3 class="text-xl font-semibold text-neutral-800">${question.text}</h3>
+                    </div>
+                    <div class="options">
+                        ${optionsHtml}
+                    </div>
+                `;
+                
+                // 为选项添加事件监听器
+                const radioInputs = questionContainer.querySelectorAll('input[type="radio"]');
+                radioInputs.forEach(input => {
+                    input.addEventListener('change', (e) => {
+                        answers[question.id] = parseInt(e.target.value);
+                        // 更新选项样式
+                        updateOptionStyles(question.id);
+                    });
+                });
+                
+                // 移除淡出动画，添加淡入动画
+                questionContainer.classList.remove('opacity-0');
+                questionContainer.classList.add('opacity-100');
+                
+            }, 300);
+        }
+
+        // 更新选项样式
+        function updateOptionStyles(questionId) {
+            const labels = questionContainer.querySelectorAll('label');
+            const selectedValue = answers[questionId];
+            
+            labels.forEach(label => {
+                const input = label.querySelector('input');
+                if (parseInt(input.value) === selectedValue) {
+                    label.classList.add('border-primary', 'bg-primary/5');
+                    label.classList.remove('border-neutral-200', 'hover:bg-neutral-50');
+                } else {
+                    label.classList.remove('border-primary', 'bg-primary/5');
+                    label.classList.add('border-neutral-200', 'hover:bg-neutral-50');
+                }
+            });
+        }
+
+        // 更新进度条
+        function updateProgress() {
+            const answeredCount = Object.keys(answers).length;
+            const progressPercentage = (answeredCount / questions.length) * 100;
+            
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${answeredCount}/${questions.length}`;
+            
+            // 更新按钮状态
+            if (currentQuestionIndex === 0) {
+                prevBtn.classList.add('hidden');
+            } else {
+                prevBtn.classList.remove('hidden');
+            }
+            
+            if (currentQuestionIndex === questions.length - 1) {
+                nextBtn.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+            }
+        }
+
+        // 下一题
+        nextBtn.addEventListener('click', () => {
+            // 检查当前题是否已回答
+            if (answers[questions[currentQuestionIndex].id] === undefined) {
+                alert('请选择一个选项后再继续');
+                return;
+            }
+            
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion(currentQuestionIndex);
+                updateProgress();
+                
+                // 滚动到题目顶部
+                window.scrollTo({
+                    top: questionContainer.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // 上一题
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion(currentQuestionIndex);
+                updateProgress();
+                
+                // 滚动到题目顶部
+                window.scrollTo({
+                    top: questionContainer.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // 提交评估
+        submitBtn.addEventListener('click', () => {
+            // 检查最后一题是否已回答
+            if (answers[questions[currentQuestionIndex].id] === undefined) {
+                alert('请选择一个选项后再提交');
+                return;
+            }
+            
+            // 检查是否所有题目都已回答
+            if (Object.keys(answers).length !== questions.length) {
+                if (!confirm('您还有未完成的题目，确定要提交吗？未回答的题目将按"无"计分。')) {
+                    return;
+                }
+            }
+            
+            // 计算总分
+            calculateScore();
+            
+            // 显示结果部分，隐藏评估部分
+            assessmentSection.classList.add('hidden');
+            resultsSection.classList.remove('hidden');
+            
+            // 滚动到结果部分
+            window.scrollTo({
+                top: resultsSection.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        });
+
+        // 计算总分并显示结果
+        function calculateScore() {
+            let totalScore = 0;
+            let positiveScore = 0;
+            let negativeScore = 0;
+            let generalScore = 0;
+            
+            // 计算各分量表得分和总分
+            questions.forEach(question => {
+                // 如果有未回答的题目，按"无"计分（1分）
+                const score = answers[question.id] || 1;
+                totalScore += score;
+                
+                // 按维度累加分数
+                if (question.dimension === 'positive') {
+                    positiveScore += score;
+                } else if (question.dimension === 'negative') {
+                    negativeScore += score;
+                } else {
+                    generalScore += score;
+                }
+            });
+            
+            // 确定分数类别
+            let category, explanation, suggestions;
+            
+            if (totalScore <= 60) {
+                category = "症状较轻";
+                explanation = `您的总分为${totalScore}分，表明目前精神症状较轻。阳性症状得分为${positiveScore}分，阴性症状得分为${negativeScore}分，均处于较低水平。`;
+                suggestions = "保持健康的生活方式，包括规律的作息、均衡的饮食和适当的运动。保持良好的社交关系，当遇到情绪或心理困扰时，可与亲友交流或寻求专业心理支持。";
+                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-primary to-primary/80 text-white";
+            } else if (totalScore <= 90) {
+                category = "中度症状";
+                explanation = `您的总分为${totalScore}分，表明可能存在中度精神症状。阳性症状得分为${positiveScore}分，阴性症状得分为${negativeScore}分，提示存在一定程度的精神病理表现。`;
+                suggestions = "建议寻求专业精神科医师或心理医生的评估和咨询，进一步了解症状性质和可能的原因。在日常生活中，尽量保持规律的作息，适当参与一些有益的活动，与亲友保持联系并寻求支持。";
+                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-yellow-500 to-yellow-400 text-white";
+            } else {
+                category = "症状明显";
+                explanation = `您的总分为${totalScore}分，表明可能存在明显的精神症状。阳性症状得分为${positiveScore}分，阴性症状得分为${negativeScore}分，提示需要专业的医疗评估和干预。`;
+                suggestions = "强烈建议尽快寻求专业精神科医师的评估和治疗。精神症状的及时干预非常重要，早期治疗有助于改善预后。请不要独自面对这些困扰，家人和朋友的支持非常重要。";
+                document.getElementById('score-card').className = "p-8 text-center bg-gradient-to-r from-red-500 to-red-400 text-white";
+            }
+            
+            // 更新结果显示
+            totalScoreElement.textContent = totalScore;
+            positiveScoreElement.textContent = positiveScore;
+            negativeScoreElement.textContent = negativeScore;
+            scoreCategoryElement.textContent = category;
+            resultExplanationElement.innerHTML = `<p>${explanation}</p>`;
+            resultSuggestionsElement.innerHTML = `<p>${suggestions}</p>`;
+        }
+
+        // 重新评估
+        restartBtn.addEventListener('click', () => {
+            // 重置变量
+            currentQuestionIndex = 0;
+            Object.keys(answers).forEach(key => delete answers[key]);
+            
+            // 更新UI
+            resultsSection.classList.add('hidden');
+            assessmentSection.classList.remove('hidden');
+            renderQuestion(currentQuestionIndex);
+            updateProgress();
+            
+            // 滚动到评估部分
+            window.scrollTo({
+                top: assessmentSection.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        });
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
